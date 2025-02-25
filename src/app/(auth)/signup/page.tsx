@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default function Signup() {
   const router = useRouter();
-  // const [loading, setLoading] = useState(false);
+  
   const [user, setUser] = useState({
     name: "",
     username: "",
@@ -26,22 +26,22 @@ export default function Signup() {
     } finally {
       console.log("Signup successful");
     }
-      // console.log("🚀 ~ file: page.tsx:29 ~ constsign_up= ~ user:", user)
+    
       console.log("🚀 ~ file: page.tsx:29 ~ constsign_up= ~ user:", user)
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 flex items-center justify-center py-7 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-7 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-bold text-blue-900">
+          <h2 className="mt-6 text-center text-3xl font-bold text-black">
             Create your account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Already have an account?{" "}
             <Link
               href="/login"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-black hover:text-gray-700"
             >
               Sign in
             </Link>
@@ -69,7 +69,7 @@ export default function Signup() {
                 type="text"
                 value={user.name}
                 onChange={(e) => setUser({ ...user, name: e.target.value })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500"
                 required
               />
             </div>
@@ -86,7 +86,7 @@ export default function Signup() {
                 type="text"
                 value={user.username}
                 onChange={(e) => setUser({ ...user, username: e.target.value })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500"
                 required
               />
             </div>
@@ -103,7 +103,7 @@ export default function Signup() {
                 type="email"
                 value={user.email}
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500"
                 required
               />
             </div>
@@ -120,7 +120,7 @@ export default function Signup() {
                 type="password"
                 value={user.password}
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500"
                 required
               />
             </div>
@@ -139,7 +139,7 @@ export default function Signup() {
                 onChange={(e) =>
                   setUser({ ...user, confirmPassword: e.target.value })
                 }
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500"
                 required
               />
             </div>
@@ -148,7 +148,7 @@ export default function Signup() {
           <div>
             <button 
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
             >
               Sign up
             </button>

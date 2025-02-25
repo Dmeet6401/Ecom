@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL("/", request.nextUrl));    
     }
 
-    if(!isPublicPath && !token){
+    if((path === "/buy" && !token) || (path === "/profile" && !token)){
         return NextResponse.redirect(new URL("/login", request.nextUrl));
     }
 
@@ -26,6 +26,6 @@ export const config = {
     '/login',
     '/profile',
     '/verifyemail',
-    
+    '/buy',
   ]
-}   
+}
