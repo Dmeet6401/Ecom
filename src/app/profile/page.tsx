@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import Navbar from "../../../components/Navbar";
+import Navbar from "../../components/Navbar";
 
 export default function Profile() {
   const router = useRouter();
