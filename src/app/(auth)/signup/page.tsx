@@ -27,7 +27,7 @@ export default function Signup() {
       console.log("Signup successful");
     }
     
-      console.log("🚀 ~ file: page.tsx:29 ~ constsign_up= ~ user:", user)
+      // console.log("🚀 ~ file: page.tsx:29 ~ constsign_up= ~ user:", user)
   };
 
   return (

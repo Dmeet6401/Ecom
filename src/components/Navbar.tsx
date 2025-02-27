@@ -7,7 +7,10 @@ const Navbar = () => {
   const router = useRouter();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // Track login status
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Track burger menu status
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Track burger menu status\
+  const [isCartClicked, setIsCartClicked] = useState(false); // Track cart icon clicked state
+  const [isProfileClicked, setIsProfileClicked] = useState(false); // Track profile icon clicked state
+  const [isLikeClicked, setIsLikeClicked] = useState(false); // Track like icon clicked state
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Check if the user is logged in on mount
@@ -46,6 +49,15 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const getUserDetail = async () => {
+    try {
+      const res = await axios.get("/api/users/myProfile");
+      router.push(`/profile/${res.data.data._id}`);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: { target: any }) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -60,7 +72,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-white p-4 shadow-md sticky top-0 ">
+    <nav className="bg-white p-4 shadow-md sticky top-0 z-50">
       <div className="max-w-[90rem] mx-auto flex justify-between items-center">
         <div className="text-black text-xl font-bold">
           <a href="/">eCom</a>
@@ -96,7 +108,7 @@ const Navbar = () => {
             // If logged in, show profile and logout
             <>
               <button
-                // onClick={handleProfileDropdown}
+                onClick={() => router.push("/cart")}
                 className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
               >
                 <svg
@@ -116,7 +128,7 @@ const Navbar = () => {
                 </svg>
               </button>
               <button
-                // onClick={handleProfileDropdown}
+                onClick={() => router.push("/like")}
                 className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
               >
                 <svg
@@ -160,12 +172,12 @@ const Navbar = () => {
               {isProfileDropdownOpen && (
                 <div className="absolute right-0 mt-[45px] w-40 bg-white border border-gray-200 rounded-md shadow-lg text-center z-10 ">
                   <div className="p-2">
-                    <a
-                      href="/profile"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                    <button
+                        onClick={getUserDetail}
+                      className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors text-center"
                     >
                       My Profile
-                    </a>
+                    </button>
                     <button
                       onClick={handleLogout}
                       className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors text-center"
@@ -220,8 +232,14 @@ const Navbar = () => {
           <a href="/kids" className="block text-black hover:text-gray-700 transition-colors px-2 py-1 text-center"> Kids</a>
           <a href="/cart" className="block text-black hover:text-gray-700 transition-colors px-2 py-1 text-center"> Cart</a>
           <a href="/Liked" className="block text-black hover:text-gray-700 transition-colors px-2 py-1 text-center">Liked</a>
-          <a href="/profile" className="block text-black hover:text-gray-700 transition-colors px-2 py-1 text-center"> My Profile</a>
+          {/* <a href={`/profile/${data}`} className="block text-black hover:text-gray-700 transition-colors px-2 py-1 text-center"> My Profile</a> */}
           {/* <a href="/Logout" className="block text-black hover:text-gray-700 transition-colors px-2 py-1">Logout</a> */}
+          <button
+              onClick={getUserDetail}
+              className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors text-center font-bold"
+            >
+              My Profile
+          </button>
           <button
               onClick={handleLogout}
               className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors text-center font-bold"

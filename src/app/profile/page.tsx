@@ -11,19 +11,9 @@ export default function Profile() {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleLogout = async () => {
-    try {
-      await axios.get("/api/users/logout");
-      router.push("/login");
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  };
-
   const getUserDetail = async () => {
     try {
       const res = await axios.get("/api/users/myProfile");
-      console.log("🚀 ~ file: page.tsx:27 ~ getUserDetail ~ res:", res)
       setData(res.data.data._id);
     } catch (error: any) {
       console.log(error.message);
