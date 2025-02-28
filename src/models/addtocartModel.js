@@ -22,6 +22,6 @@ const addToCartSchema = new mongoose.Schema({
     }
 });
 
-const AddToCart = mongoose.model('AddToCart', addToCartSchema);
+const AddToCart = mongoose.models.cart || mongoose.model('cart', addToCartSchema);
 
 module.exports = AddToCart;

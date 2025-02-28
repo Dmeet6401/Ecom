@@ -6,8 +6,19 @@ Connect();
 
 export async function GET(request: NextRequest) {
   try {
-    const products = await Product.find();
-    return NextResponse.json(products);
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (id) {
+      const product = await Product.findById(id);
+      if (!product) {
+        return NextResponse.json({ error: "Product not found" }, { status: 404 });
+      }
+      return NextResponse.json(product);
+    } else {
+      const products = await Product.find();
+      return NextResponse.json(products);
+    }
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
@@ -42,3 +53,5 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
+

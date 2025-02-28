@@ -1,5 +1,5 @@
-import { create } from "domain";
 import mongoose from "mongoose";
+import { describe } from "node:test";
 
 const genderCategory = ["Men", "Women", "Kids"];
 // id: 2,
@@ -35,6 +35,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
 
+    },
+    describe: {
+        type: String,
+        required: true,
     },
     createdAt: {
         type: Date,
