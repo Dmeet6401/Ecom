@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Router from "next/router";
 import React, { useEffect, useState } from "react";
 
 interface Product {
@@ -52,6 +53,10 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     }
   };
 
+  const handleViewProduct = () => {
+    Router.push(`/productdetail/${product._id}`);
+  };
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8">
@@ -78,7 +83,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         </div>
 
         <div className="mt-4 flex space-x-4 justify-between">
-          <button onClick={handleLikeClick} className="flex items-center">
+          {/* <button onClick={handleLikeClick} className="flex items-center">
             <svg
               width="24"
               height="24"
@@ -96,8 +101,8 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
                 strokeLinejoin="round"
               />
             </svg>
-          </button>
-          <div className="flex items-center space-x-2">
+          </button> */}
+          {/* <div className="flex items-center space-x-2">
             <button
               onClick={handleDecrement}
               className="px-2 py-1 bg-gray-200 rounded-md"
@@ -121,7 +126,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             }`}
           >
             {isAdded ? "Added to Cart" : "Add to Cart"}
+          </button> */}
+          <button
+            onClick={handleViewProduct}
+            className="w-full py-2 text-white text-sm font-medium rounded-md bg-gray-600 hover:bg-black"
+          >
+            View Product
           </button>
+          
           {/* Heart Like Button */}
         </div>
       </div>
