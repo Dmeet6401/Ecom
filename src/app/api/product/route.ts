@@ -6,20 +6,30 @@ Connect();
 
 export async function GET(request: NextRequest) {
   try {
+    // Extract search parameters from the request URL
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
+    // console.log("id", id);
+    //postman url
+    // http://localhost:3000/api/product?id=616c5d2b6f3e5f0d
 
+    // Check if 'id' parameter is present
     if (id) {
+      // Find product by ID
       const product = await Product.findById(id);
       if (!product) {
+        // Return 404 if product not found
         return NextResponse.json({ error: "Product not found" }, { status: 404 });
       }
+      // Return the found product
       return NextResponse.json(product);
     } else {
+      // If no 'id', return all products
       const products = await Product.find();
       return NextResponse.json(products);
     }
   } catch (error: any) {
+    // Handle any errors
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

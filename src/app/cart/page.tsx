@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import CartCard from '../../components/CartCard';
 import Navbar from '@/components/Navbar';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 interface CartItem {
     productId: string;
@@ -14,9 +15,19 @@ interface CartItem {
         price: number;
     };
 }
-
 const CartPage: React.FC = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [total, setTotal] = useState<number>(0);
+
+    useEffect(() => {
+        const totalAmount = cartItems.reduce((acc, item) => {
+            if (item.product) {
+                return acc + (item.quantity * item.product.price);
+            }
+            return acc;
+        }, 0);
+        setTotal(totalAmount);
+    }, [cartItems]);
 
     useEffect(() => {
         const fetchCartItems = async () => {
@@ -32,6 +43,8 @@ const CartPage: React.FC = () => {
 
         fetchCartItems();
     }, []);
+
+    const router = useRouter();
 
     return (
         <>
@@ -57,6 +70,7 @@ const CartPage: React.FC = () => {
                                             quantity={item.quantity}
                                             price={item.product.price}
                                         />
+
                                     )
                                 ))}
                             </div>
@@ -64,6 +78,16 @@ const CartPage: React.FC = () => {
                     </div>
                 </div>
             </section>
+            <div className="fixed bottom-0 left-0 right-0 bg-white p-3 shadow-lg">
+            <div className="flex justify-between items-center">
+                <span className="text-lg font-medium">Total Amount: ₹{total}</span>
+                <button 
+                onClick={() => router.push(`/checkout?${total}`)} 
+                type="button" className="px-4 py-2 text-sm font-medium text-white bg-gray-700 rounded-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-black">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
         </>
     );
 };

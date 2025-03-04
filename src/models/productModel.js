@@ -1,13 +1,6 @@
 import mongoose from "mongoose";
-import { describe } from "node:test";
 
 const genderCategory = ["Men", "Women", "Kids"];
-// id: 2,
-//     name: "Basic Tee",
-//     color: "Black",
-//     price: "$35",
-//     imageSrc: "https://tailwindui.com/plus-assets/img/ecommerce-images/product-page-01-related-product-02.jpg",
-//     imageAlt: "Front of men's Basic Tee in black."
  
 const productSchema = new mongoose.Schema({
     name: {

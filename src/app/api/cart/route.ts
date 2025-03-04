@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
       };
     });
 
-    console.log("🚀 ~ GET ~ cartWithProductDetails:", cartWithProductDetails)
+    // console.log("🚀 ~ GET ~ cartWithProductDetails:", cartWithProductDetails)
 
     return NextResponse.json(cartWithProductDetails);
   } catch (error: any) {

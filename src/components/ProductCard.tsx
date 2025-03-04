@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
-import Router from "next/router";
+// import Router from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface Product {
@@ -14,6 +15,7 @@ interface Product {
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   // State to track whether the heart button is clicked
+  const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -53,8 +55,13 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     }
   };
 
-  const handleViewProduct = () => {
-    Router.push(`/productdetail/${product._id}`);
+  const handleViewProduct = async () => {
+    try {
+      router.push(`/product-overview/${product._id}`);
+    } catch (error:any) {
+      console.log(error.message);
+    }
+    // Router.push(`/product-overview/${product._id}`);
   };
 
   return (
