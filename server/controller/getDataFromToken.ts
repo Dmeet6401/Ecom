@@ -7,7 +7,7 @@ export default function getDataFromToken(request : Request){
     try{
         const token = request.cookies.token?.value || "";
         const decodedToken:any = jwt.verify(token, process.env.TOKEN_SECRET!);
-        return decodedToken; // return the entire decoded token
+        return decodedToken; 
     } catch(error:any){
         console.log("bye bye")
         throw new Error(error.message);

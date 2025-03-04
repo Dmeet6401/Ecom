@@ -8,6 +8,9 @@ const Navbar = () => {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // Track login status
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Track burger menu status\
+  const [isCartClicked, setIsCartClicked] = useState(false); // Track cart icon clicked state
+  const [isProfileClicked, setIsProfileClicked] = useState(false); // Track profile icon clicked state
+  const [isLikeClicked, setIsLikeClicked] = useState(false); // Track like icon clicked state
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Check if the user is logged in on mount
