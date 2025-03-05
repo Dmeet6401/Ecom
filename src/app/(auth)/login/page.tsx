@@ -3,6 +3,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useAuth } from "@/app/context/AuthContext";
+import { response } from "express";
 
 export default function Login() {
   const router = useRouter();
@@ -11,17 +13,23 @@ export default function Login() {
     password: "",
   });
 
+  const { setToken } = useAuth();
+
   // const [loading, setLoading] = useState(false);
 
   const log_in = async (e: React.FormEvent) => {
     e.preventDefault();
     // setLoading(true);
     try {
-      await axios.post("/api/users/login", user);
+      const response = await axios.post("/api/users/login", user);
+      // console.log("login data",response.data);
+      const token = response.data.token;
+      setToken(token);
       // const response = await axios.post("/api/users/login", user);
       console.log("Login successful");
       // setLoading(false);
       router.push("/");
+
     } catch (error: any) {
       // setLoading(false);
       console.log(error.message);

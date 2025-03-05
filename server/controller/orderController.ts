@@ -1,16 +1,21 @@
 import { Request, Response } from 'express';
 const db = require('../models/index');
 import getDataFromToken from "./getDataFromToken";
+import jwt from "jsonwebtoken";
 
 const Order = db.orderDetails;
 
 // console.log("🚀 ~ Order:", Order)
-
+ 
 
 const createOrder = async (req : Request, res: Response) => {
     try {
-        const userId = await getDataFromToken(req);
-        req.body.userId = userId;
+        
+        
+        const decodedToken: any = jwt.verify(req.body.userId, "MyTypescriptLearning");
+        const decodeuserId = (decodedToken.id.toString());
+        // const decodeuserId = await getDataFromToken(req.body.userId);
+        req.body.userId = decodeuserId;
 
         const order = await Order.create(req.body);
         res.status(201).json(order);

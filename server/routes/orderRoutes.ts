@@ -6,7 +6,7 @@ const express = require("express");
 
 const router = express.Router();
 
-router.post("/addOrder",getDataFromToken, OrderController.createOrder);
+router.post("/addOrder", OrderController.createOrder);
 router.get("/getOrder/:id", OrderController.getOrder);
 
 module.exports = router;

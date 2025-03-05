@@ -4,8 +4,8 @@ import Navbar from "@/components/Navbar";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from 'next/navigation';
-
-
+import { useEffect } from "react";
+import { useAuth } from "@/app/context/AuthContext";
 
 const CheckoutPage: React.FC = () => {
   const router = useRouter();
@@ -14,11 +14,24 @@ const CheckoutPage: React.FC = () => {
   // const total = searchParams.get("total") || "0"; // Get the total from query params
   const [paymentMethod, setPaymentMethod] = useState("credit card"); 
   const [paymentStatus, setPaymentStatus] = useState("pending");
+  const [userId, setUser] = useState<string>("");
+  const { token } = useAuth();
+
+  useEffect(() => {
+    console.log("checkout page token", token);
+    if (token) {
+      setUser(token);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    console.log("checkout page userId", userId);
+  }, [userId]);
 
   const [order, setOrder] = useState({
     // Ideally should be dynamic or auto-generated
     order_id : "ORD1232586" ,
-    // userId : ,
+    userId : "",
     order_date: new Date().toISOString(), // Set current date-time
     total_amount: total,
     name: "",
@@ -33,11 +46,13 @@ const CheckoutPage: React.FC = () => {
     delivery_status: "shipped", // Default, or you can set this dynamically
   });
 
+
   const checkout = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent the default form submission
 
     const updatedOrder = {
       ...order,
+      userId: userId,
       payment_status: paymentMethod === "cash" ? "pending" : "completed",
     };
 
