@@ -7,6 +7,16 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from "react";
 import { useAuth } from "@/app/context/AuthContext";
 
+interface CartItem {
+  productId: string;
+  quantity: number;
+  product: {
+      _id: string;
+      name: string;
+      imageSrc: string;
+      price: number;
+  };
+}
 const CheckoutPage: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -15,6 +25,8 @@ const CheckoutPage: React.FC = () => {
   const [paymentMethod, setPaymentMethod] = useState("credit card"); 
   const [paymentStatus, setPaymentStatus] = useState("pending");
   const [userId, setUser] = useState<string>("");
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  
   const { token } = useAuth();
 
   useEffect(() => {
@@ -27,11 +39,24 @@ const CheckoutPage: React.FC = () => {
   useEffect(() => {
     console.log("checkout page userId", userId);
   }, [userId]);
+  useEffect(() => {
+    const fetchCartItems = async () => {
+        try {
+            const response = await axios.get('/api/cart');
+            const data = response.data || [];
+            
+            setCartItems(data);
+        } catch (error) {
+            console.error('Error fetching cart items:', error);
+        }
+    };
+
+    fetchCartItems();
+}, []);
 
   const [order, setOrder] = useState({
-    // Ideally should be dynamic or auto-generated
-    order_id : "ORD1232586" ,
-    userId : "",
+    order_id: `ORD${Math.floor(10000000 + Math.random() * 90000000)}`, // Generate unique 8-digit order ID
+    userId: "",
     order_date: new Date().toISOString(), // Set current date-time
     total_amount: total,
     name: "",
@@ -44,8 +69,8 @@ const CheckoutPage: React.FC = () => {
     payment_type: paymentMethod, // Default, can be updated based on the payment method
     payment_status: paymentStatus, // Default, or you can set this dynamically
     delivery_status: "shipped", // Default, or you can set this dynamically
+    products: cartItems,
   });
-
 
   const checkout = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent the default form submission
@@ -54,13 +79,14 @@ const CheckoutPage: React.FC = () => {
       ...order,
       userId: userId,
       payment_status: paymentMethod === "cash" ? "pending" : "completed",
+      products: cartItems, // Ensure products are included in the order
     };
 
     try {
       // Assuming your backend expects this JSON structure at this endpoint
       await axios.post("http://localhost:5000/api/addOrder", updatedOrder);
       console.log("Order added successfully");
-      router.push('/');
+      router.push(`/invoice?${order.order_id}`);
     } catch (error: any) {
       console.error("Failed to add order", error.message);
     }

@@ -58,6 +58,15 @@ const Navbar = () => {
     }
   };
 
+  const getOrderDetail = async () => {
+    try {
+      
+    } catch (error: any) {
+      console.log(error.message);
+            
+    }
+  }
+
   useEffect(() => {
     const handleClickOutside = (event: { target: any }) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -179,6 +188,12 @@ const Navbar = () => {
                       My Profile
                     </button>
                     <button
+                        onClick={getOrderDetail}
+                      className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors text-center"
+                    >
+                      My Orders
+                    </button>
+                    <button
                       onClick={handleLogout}
                       className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors text-center"
                     >
@@ -239,6 +254,12 @@ const Navbar = () => {
               className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors text-center font-bold"
             >
               My Profile
+          </button>
+          <button
+              onClick={getOrderDetail}
+              className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors text-center font-bold"
+            >
+              My Orders
           </button>
           <button
               onClick={handleLogout}

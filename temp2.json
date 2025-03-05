@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "67c84f3c060a602265f434a9",
+    "userId": "67c15a8884357577e1d732fc",
+    "productId": "67c1b1f19280364584855b0e",
+    "quantity": 3,
+    "addedAt": "2025-03-05T13:18:52.742Z",
+    "__v": 0,
+    "product": {
+      "_id": "67c1b1f19280364584855b0e",
+      "name": "Crew Neck Sweater",
+      "color": "Grey",
+      "price": 45,
+      "imageSrc": "https://picsum.photos/id/239/200/300",
+      "gender": "Women",
+      "category": "Sweaters",
+      "describe": "A cozy crew neck sweater perfect for layering.",
+      "createdAt": "2025-02-28T12:10:00.000Z",
+      "updatedAt": "2025-02-28T12:10:00.000Z",
+      "__v": 0
+    }
+  },
+  {
+    "_id": "67c84f5a060a602265f434c4",
+    "userId": "67c15a8884357577e1d732fc",
+    "productId": "67c1b1f19280364584855b12",
+    "quantity": 3,
+    "addedAt": "2025-03-05T13:19:22.371Z",
+    "__v": 0,
+    "product": {
+      "_id": "67c1b1f19280364584855b12",
+      "name": "Track Pants",
+      "color": "Black",
+      "price": 40,
+      "imageSrc": "https://picsum.photos/id/243/200/300",
+      "gender": "Women",
+      "category": "Pants",
+      "describe": "Stylish track pants for comfort and performance.",
+      "createdAt": "2025-02-28T12:30:00.000Z",
+      "updatedAt": "2025-02-28T12:30:00.000Z",
+      "__v": 0
+    }
+  }
+]

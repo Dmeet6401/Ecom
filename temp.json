@@ -1,0 +1,31 @@
+[
+  {
+    "_id": "67c1acee700b71c0dda23095",
+    "userId": "67bc1499ff5b11bb0a4f6bd2",
+    "productId": "67c02e443614b5843b8b76a5",
+    "quantity": 4,
+    "addedAt": "2025-02-28T12:32:46.220Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c84c7f060a602265f43485",
+    "userId": "67bc1499ff5b11bb0a4f6bd2",
+    "productId": "67c1b1f19280364584855b0c",
+    "quantity": 3,
+    "addedAt": "2025-03-05T13:07:11.933Z",
+    "__v": 0,
+    "product": {
+      "_id": "67c1b1f19280364584855b0c",
+      "name": "Basic Tee",
+      "color": "Black",
+      "price": 35,
+      "imageSrc": "https://picsum.photos/id/237/200/300",
+      "gender": "Men",
+      "category": "T-Shirts",
+      "describe": "A simple black basic tee for casual wear.",
+      "createdAt": "2025-02-28T12:00:00.000Z",
+      "updatedAt": "2025-02-28T12:00:00.000Z",
+      "__v": 0
+    }
+  }
+]

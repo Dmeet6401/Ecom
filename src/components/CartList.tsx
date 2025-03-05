@@ -11,10 +11,7 @@ interface CartItem {
 }
 
 const CartList: React.FC = () => {
-    const [cartItems, setCartItems] = useState<CartItem[]>([
-        { id: '1', imageSrc: '/path/to/image1.jpg', name: 'Produ    ct 1', quantity: 2, price: 100 },
-        { id: '2', imageSrc: '/path/to/image2.jpg', name: 'Product 2', quantity: 1, price: 200 },
-    ]);
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
     const handleRemove = (id: string) => {
         setCartItems(cartItems.filter(item => item.id !== id));
@@ -30,7 +27,7 @@ const CartList: React.FC = () => {
                     name={item.name}
                     quantity={item.quantity}
                     price={item.price}
-                    onRemove={handleRemove}
+                    // onRemove={handleRemove}
                 />
             ))}
         </div>
