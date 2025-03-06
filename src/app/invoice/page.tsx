@@ -61,10 +61,8 @@ const InvoicePage = () => {
     const fetchOrderData = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/getOrder/${orderId}`);
-        console.log("======================================================", response.data);
         setOrderData(response.data);
 
-        console.log("=============================================Order Data:", response.data?.products);
       } catch (error) {
         console.error('Error fetching order data:', error);
       }
