@@ -2,10 +2,11 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import ProductCard from "../components/ProductCard";
-import SideFilter from "../components/SideFilter"; // Import SideFilter
+import SideFilter from "../components/SideFilter";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]); // Add state for filtered products
 
   useEffect(() => {
     // Simulate fetching data from a database
@@ -22,9 +23,9 @@ export default function Home() {
     <>
       <Navbar />
       <div className="bg-white flex">
-        <SideFilter />
+        <SideFilter setFilteredProducts={setFilteredProducts} /> {/* Pass setFilteredProducts to SideFilter */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
+          {(filteredProducts.length > 0 ? filteredProducts : products).map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
