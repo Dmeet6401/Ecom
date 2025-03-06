@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface Product {
+  _id: any;
   id: string;
   imageSrc: string;
   imageAlt: string;
