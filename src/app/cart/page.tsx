@@ -75,19 +75,31 @@ const CartPage: React.FC = () => {
                                 ))}
                             </div>
                         </div>
+                        <div className="w-full lg:w-1/3 xl:w-1/4">
+                            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+                                <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
+                                {cartItems.map((item) => (
+                                    item.product && (
+                                        <div key={item.product._id} className="flex justify-between mb-2">
+                                            <span>{item.product.name} x {item.quantity}</span>
+                                            <span>₹{item.quantity * item.product.price}</span>
+                                        </div>
+                                    )
+                                ))}
+                                <div className="flex justify-between mb-2 font-bold">
+                                    <span>Total Amount:</span>
+                                    <span>₹{total}</span>
+                                </div>
+                                <button 
+                                    onClick={() => router.push(`/checkout?${total}`)} 
+                                    type="button" className="w-full px-4 py-2 text-sm font-medium text-white bg-gray-700 rounded-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-black">
+                                    Proceed to Checkout
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
-            <div className="fixed bottom-0 left-0 right-0 bg-white p-3 shadow-lg">
-            <div className="flex justify-between items-center">
-                <span className="text-lg font-medium">Total Amount: ₹{total}</span>
-                <button 
-                onClick={() => router.push(`/checkout?${total}`)} 
-                type="button" className="px-4 py-2 text-sm font-medium text-white bg-gray-700 rounded-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-black">
-                    Proceed to Checkout
-                </button>
-            </div>
-        </div>
         </>
     );
 };
